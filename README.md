@@ -45,8 +45,6 @@ brew unlink zstd && brew link zstd
 export LDFLAGS="-L/opt/homebrew/opt/zstd/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/zstd/include"
 gem install mysql2 -v 0.5.6 -- --with-mysql-dir=$(brew --prefix mysql-client) --with-opt-dir=$(brew --prefix zstd)
+
+bundle install
 ```
-
-- ...
-
-# Todo_tec_karikyuramu_server
