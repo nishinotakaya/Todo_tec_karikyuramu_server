@@ -36,6 +36,6 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def todo_params
-    params.require(:todo).permit(:content, :completed, :delete_flg, :sort, :sub_content)
+    params.require(:todo).permit(:content, :completed, :delete_flg, :sort, :sub_content, :output_date)
   end
 end
