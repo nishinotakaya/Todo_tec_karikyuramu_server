@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_08_122018) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_24_092225) do
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "content"
     t.boolean "completed"
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_08_122018) do
     t.integer "sort"
     t.string "sub_content"
     t.date "output_date"
+    t.integer "progress_rate"
   end
 
 end
