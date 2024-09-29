@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_24_101757) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_145831) do
   create_table "todos", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "content"
     t.boolean "completed"
@@ -18,11 +18,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_101757) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sort"
-    t.string "sub_content"
+    t.string "sub_content", limit: 10000
     t.date "output_date"
     t.integer "progress_rate"
     t.date "start_date"
     t.date "completion_date"
+    t.date "completion_date_actual"
+    t.integer "copy_id"
+    t.index ["copy_id"], name: "index_todos_on_copy_id"
   end
 
 end
