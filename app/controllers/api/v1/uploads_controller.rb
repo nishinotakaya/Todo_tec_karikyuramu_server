@@ -1,15 +1,14 @@
-require 'cgi'
-
 class Api::V1::UploadsController < ApplicationController
   def create
     file = params[:image]
 
     if file
-      # ファイル名をURLエンコード (CGI.escapeを使用) し、さらに '+' を '%20' に置換
-      encoded_filename = CGI.escape(file.original_filename).gsub('+', '%20')
+      # ランダムなファイル名を生成（例: "picture_123456.png"）
+      extension = File.extname(file.original_filename) # 元のファイルの拡張子を取得
+      random_filename = "picture_#{SecureRandom.uuid}#{extension}" # UUIDを使ってランダムなファイル名を作成
 
       # public/uploadsフォルダーに画像を保存する
-      file_path = Rails.root.join('public', 'uploads', encoded_filename)
+      file_path = Rails.root.join('public', 'uploads', random_filename)
       
       # デバッグ出力
       Rails.logger.debug "Saving file to: #{file_path}"
@@ -18,12 +17,11 @@ class Api::V1::UploadsController < ApplicationController
         f.write(file.read)
       end
 
-      # エンコードされたファイル名を含むURLを生成
-      image_url = "/uploads/#{encoded_filename}"
+      # 生成されたファイル名を含むURLを生成
+      image_url = "/uploads/#{random_filename}"
 
       # デバッグ出力
       Rails.logger.debug "Generated image URL: #{image_url}"
-      binding.pry
       render json: { url: image_url }, status: :ok
     else
       render json: { error: 'ファイルがありません' }, status: :unprocessable_entity
